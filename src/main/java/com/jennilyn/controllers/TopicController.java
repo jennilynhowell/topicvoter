@@ -1,27 +1,28 @@
 package com.jennilyn.controllers;
 
+import com.jennilyn.interfaces.TopicRepository;
 import com.jennilyn.models.Topic;
+import com.jennilyn.repositories.TopicRepositoryImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class TopicController {
 
+    @Autowired
+    private TopicRepository repo;
+
     @RequestMapping("/")
     public String index(Model model){
-        Topic first = new Topic(1, "JavaSpring", "Let's learn Spring");
-        Topic second = new Topic(2, "Node", "How do we use JS on the back end?");
-        Topic third = new Topic(3, "React", "What's a single-page app, anyway?");
 
-        ArrayList<Topic> topics = new ArrayList<>();
-        topics.add(first);
-        topics.add(second);
-        topics.add(third);
+        List<Topic> allTopics = repo.findAll();
 
-        model.addAttribute("topics", topics);
+        model.addAttribute("topics", allTopics);
 
         return "index";
     }
