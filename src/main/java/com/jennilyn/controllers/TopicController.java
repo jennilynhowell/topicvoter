@@ -23,16 +23,13 @@ public class TopicController {
     public String index(Model model){
         List<Topic> allTopics = repo.findAll();
         model.addAttribute("topics", allTopics);
-
         return "index";
     }
 
     @RequestMapping(value = "/createTopic", method = RequestMethod.POST)
     public String createTopic(@RequestParam("title") String title,
                               @RequestParam("description") String description) {
-
         repo.add(title, description);
-
         return "redirect:/";
     }
 
