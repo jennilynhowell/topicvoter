@@ -8,5 +8,6 @@ public interface TopicRepository {
 
     List<Topic> findAll();
     void add(String title, String description);
+    void delete(long id);
 
 }

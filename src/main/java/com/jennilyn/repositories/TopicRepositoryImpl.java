@@ -25,6 +25,11 @@ public class TopicRepositoryImpl implements TopicRepository {
         jdbcTemplate.update("INSERT INTO topic (title, description) VALUES (?, ?)", title, description);
     }
 
+    @Override
+    public void delete(long id) {
+        jdbcTemplate.update("DELETE FROM topic WHERE id = ?", id);
+    }
+
     private static class TopicMapper implements RowMapper<Topic> {
         @Override
         public Topic mapRow(ResultSet resultSet, int i) throws SQLException {
